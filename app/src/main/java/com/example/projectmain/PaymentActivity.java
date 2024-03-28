@@ -5,22 +5,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.example.projectmain.Refactoring.Decorator.BlueTickDecorator;
 import com.example.projectmain.Refactoring.Decorator.Decorator;
 import com.example.projectmain.Refactoring.Decorator.GoldCrownDecorator;
 import com.example.projectmain.Refactoring.Decorator.IDecorator;
 import com.example.projectmain.Refactoring.Decorator.PurpleFrameDecorator;
+import com.example.projectmain.Refactoring.SingletonColorChange.ColorManager;
 
 
 public class PaymentActivity extends AppCompatActivity {
 
     Button  btnBuyGoldFrameAndCrown, btnGreenTick, btnByAll;
     ImageButton btn_Exit;
+    LinearLayout llWrapPayment;
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +36,10 @@ public class PaymentActivity extends AppCompatActivity {
         btnByAll = findViewById(R.id.btnGoldFrameAndCrownAndTick);
         btn_Exit = findViewById(R.id.btn_exit);
 
+        llWrapPayment = findViewById(R.id.wrapPayment);
 
+        ColorManager color = ColorManager.getInstance();
+        llWrapPayment.setBackgroundDrawable(color.getBackgroundDrawable());
         btn_Exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

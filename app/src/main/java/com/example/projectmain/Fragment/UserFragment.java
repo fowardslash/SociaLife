@@ -5,15 +5,19 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,6 +32,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.example.projectmain.Adapter.UserPostAdapter;
+import com.example.projectmain.Global.OnColorChangeListener;
 import com.example.projectmain.Refactoring.SingletonColorChange.ColorManager;
 import com.example.projectmain.Database.DB;
 import com.example.projectmain.Model.Post;
@@ -83,6 +88,19 @@ public class UserFragment extends Fragment {
 
     TextView tvContent;
     RecyclerView rcvPosts;
+
+    private OnColorChangeListener colorChangeListener;
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof OnColorChangeListener) {
+            colorChangeListener = (OnColorChangeListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + " must implement OnColorChangeListener");
+        }
+    }
+
 
 
     @Override
@@ -186,7 +204,10 @@ public class UserFragment extends Fragment {
             }
         })).attach();
         tlPostType.setTabIconTintResource(isColorDark(ColorManager.getInstance().getBackgroundColor()) ? R.color.white : R.color.text);
-        setFragmentBackgroundColor(ColorManager.getInstance().getBackgroundColor());
+
+        setFragmentBackgroundColor(ColorManager.getInstance().getBackgroundDrawable());
+        Log.d("COLOR CHANGE: ", String.valueOf(ColorManager.getInstance().getBackgroundColor()));
+
     }
 
     private void showPopupMenu(View v) {
@@ -194,32 +215,31 @@ public class UserFragment extends Fragment {
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                // Xử lý sự kiện khi người dùng chọn một mục từ menu
+                int drawableResId;
                 switch (item.getItemId()) {
                     case R.id.color_white:
-                        ColorManager.getInstance().setBackgroundColor(Color.WHITE);
-                        setFragmentBackgroundColor(ColorManager.getInstance().getBackgroundColor());
-                        tlPostType.setTabIconTintResource(isColorDark(ColorManager.getInstance().getBackgroundColor()) ? R.color.white : R.color.text);
+                        drawableResId = R.drawable.gradient_instargram;
                         break;
                     case R.id.color_yellow:
-                        ColorManager.getInstance().setBackgroundColor(Color.YELLOW);
-                        setFragmentBackgroundColor(ColorManager.getInstance().getBackgroundColor());
-                        tlPostType.setTabIconTintResource(isColorDark(ColorManager.getInstance().getBackgroundColor()) ? R.color.white : R.color.text);
+                        drawableResId = R.drawable.gradient_list2;
                         break;
                     case R.id.color_red:
-                        ColorManager.getInstance().setBackgroundColor(Color.RED);
-                        setFragmentBackgroundColor(ColorManager.getInstance().getBackgroundColor());
-                        tlPostType.setTabIconTintResource(isColorDark(ColorManager.getInstance().getBackgroundColor()) ? R.color.white : R.color.text);
+                        drawableResId = R.drawable.gradient_list1;
                         break;
-
                     case R.id.color_blue:
-                        ColorManager.getInstance().setBackgroundColor(Color.BLUE);
-                        setFragmentBackgroundColor(ColorManager.getInstance().getBackgroundColor());
-                        tlPostType.setTabIconTintResource(isColorDark(ColorManager.getInstance().getBackgroundColor()) ? R.color.white : R.color.text);
+                        drawableResId = R.drawable.gradient_list3;
+                        break;
+                    case R.id.color_peach:
+                        drawableResId = R.drawable.gradient_list5;
                         break;
                     default:
                         return false;
                 }
+                Drawable drawable = ContextCompat.getDrawable(getContext(), drawableResId);
+                ColorManager.getInstance().setBackgroundDrawable(drawable);
+                setFragmentBackgroundColor(drawable); // Pass the drawable resource ID to the method
+                tlPostType.setTabIconTintResource(isColorDark(drawableResId) ? R.color.white : R.color.text); // Check darkness based on drawable resource ID
+                colorChangeListener.onColorChanged(drawable);
                 adapter.notifyItemChanged(0);
                 adapter.notifyItemChanged(1);
                 return true;
@@ -227,18 +247,16 @@ public class UserFragment extends Fragment {
         });
         popupMenu.inflate(R.menu.menu_color);
         popupMenu.show();
-
-
     }
 
-    public void setFragmentBackgroundColor(int color) {
-        getView().setBackgroundColor(color);
-        tlPostType.setBackgroundColor(color);
+    public void setFragmentBackgroundColor(Drawable backgroundDrawable) {
+        getView().setBackgroundDrawable(backgroundDrawable);
+        tlPostType.setBackgroundDrawable(backgroundDrawable);
 
-
-        int textColor = Color.BLACK; // Mặc định là màu đen
-        if (isColorDark(color)) {
-            textColor = Color.WHITE; // Chuyển sang màu trắng nếu nền là màu tối
+        int textColor = Color.BLACK; // Default to black text color
+        ColorManager colorManager = ColorManager.getInstance();
+        if (colorManager.isColorDark()) {
+            textColor = Color.WHITE; // Change to white text color if background is dark
         }
         mtvUsername.setTextColor(textColor);
         mtvFollowingCount.setTextColor(textColor);
@@ -251,11 +269,8 @@ public class UserFragment extends Fragment {
 
         tvborder1.setBackgroundColor(textColor);
         tvborder2.setBackgroundColor(textColor);
-
-
-
-
     }
+
     private boolean isColorDark(int color) {
         // Lấy giá trị trung bình của các thành phần màu (R, G, B) để xác định màu sáng hay màu tối
         double darkness = 1 - (0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114 * Color.blue(color)) / 255;

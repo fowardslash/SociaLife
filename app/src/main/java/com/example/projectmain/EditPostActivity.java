@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.projectmain.Database.DB;
 import com.example.projectmain.Model.Post;
+import com.example.projectmain.Refactoring.SingletonColorChange.ColorManager;
 import com.example.projectmain.Refactoring.State.EditedPostState;
 import com.example.projectmain.Refactoring.State.PostContext;
 import com.example.projectmain.Refactoring.Strategy.CameraImagePicker;
@@ -67,6 +68,7 @@ public class EditPostActivity extends AppCompatActivity {
         btnExit = findViewById(R.id.btn_exit);
         getNewImage = findViewById(R.id.btnNewImage);
         getImageGallery = findViewById(R.id.btnNewImageLib);
+
 
         String name = share.getString(KEY_NAME, null);
         db = new DB(this);

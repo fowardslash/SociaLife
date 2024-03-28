@@ -2,14 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/color_white"
-        android:title="Trắng" />
+        android:title="Total"
+        />
     <item
         android:id="@+id/color_yellow"
-        android:title="Vàng" />
+        android:title="Summber" />
     <item
         android:id="@+id/color_red"
-        android:title="Đỏ" />
+        android:title="Sea" />
     <item
         android:id="@+id/color_blue"
-        android:title="Xanh" />
+        android:title="Spring" />
+    <item
+        android:id="@+id/color_peach"
+        android:title="Peach" />
 </menu>

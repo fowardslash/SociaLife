@@ -6,10 +6,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +25,7 @@ import android.widget.ImageButton;
 
 import com.example.projectmain.Adapter.PostAdapter;
 import com.example.projectmain.Database.DB;
+import com.example.projectmain.Global.OnColorChangeListener;
 import com.example.projectmain.Model.Post;
 import com.example.projectmain.Model.User;
 import com.example.projectmain.R;
@@ -39,7 +42,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class DiscoverFragment extends Fragment  {
+public class DiscoverFragment extends Fragment {
     public static DiscoverFragment newInstance() {
         DiscoverFragment fragment = new DiscoverFragment();
 
@@ -291,6 +294,12 @@ public class DiscoverFragment extends Fragment  {
         }
         return posts;
     }
+
+//    @Override
+//    public void onColorChanged(int color) {
+//        int colorFromResources = ContextCompat.getColor(requireContext(), R.color.instagram_gradient);
+//        recyclerView.setBackgroundColor(color);
+//    }
 }
 
 

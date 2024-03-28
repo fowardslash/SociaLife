@@ -19,7 +19,8 @@
         android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,7 +74,8 @@
         app:itemRippleColor="@android:color/transparent"
         app:itemTextColor="@drawable/color_item_menu"
         app:labelVisibilityMode="unlabeled"
-        app:menu="@menu/item_menu">
+        app:menu="@menu/item_menu"
+        >
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"

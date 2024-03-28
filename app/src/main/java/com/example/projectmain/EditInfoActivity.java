@@ -29,6 +29,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.projectmain.Database.DB;
@@ -37,6 +38,7 @@ import com.example.projectmain.Model.User;
 import com.example.projectmain.Refactoring.Proxy.UserManager;
 import com.example.projectmain.Refactoring.Proxy.UserProxy;
 import com.example.projectmain.Refactoring.Singleton.GlobalUser;
+import com.example.projectmain.Refactoring.SingletonColorChange.ColorManager;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -52,6 +54,8 @@ public class    EditInfoActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SQLiteDatabase mydb;
 
+    LinearLayout llchangeTime;
+
 
     User user;
 
@@ -66,6 +70,7 @@ public class    EditInfoActivity extends AppCompatActivity {
 
     private static final String KEY_IMAGE_LINK = "linkImage";
     private static final String KEY_NAME = "name";
+
 
 
     private String[] cameraPermission;
@@ -85,6 +90,9 @@ public class    EditInfoActivity extends AppCompatActivity {
 
         db = new DB(this);
 
+        llchangeTime = findViewById(R.id.changeTime);
+
+
         sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         user = GlobalUser.getInstance(this).getUser();
         edtUserName.setText(user.getName());
@@ -101,6 +109,11 @@ public class    EditInfoActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        ColorManager color = ColorManager.getInstance();
+        llchangeTime.setBackgroundDrawable(color.getBackgroundDrawable());
+
+
 
 
 

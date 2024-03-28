@@ -12,12 +12,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.projectmain.Adapter.FollowerAdapter;
 import com.example.projectmain.Database.DB;
 import com.example.projectmain.Model.Follower;
 import com.example.projectmain.Model.User;
+import com.example.projectmain.Refactoring.SingletonColorChange.ColorManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,8 @@ public class FollowerActivity extends AppCompatActivity {
 
     DB db;
 
+    ScrollView scrollView;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,7 @@ public class FollowerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_follower);
         tvCount = findViewById(R.id.tvFollowCount);
         exitBTN = findViewById(R.id.btn_exit);
+        scrollView = findViewById(R.id.tbActionbar);
         exitBTN.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,6 +65,10 @@ public class FollowerActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         tvCount.setText("Đang theo dõi " + String.valueOf(listFollowers(currentUser.getId()).size()) + " người");
+
+        ColorManager colorManager = ColorManager.getInstance();
+        recyclerView.setBackgroundDrawable(colorManager.getBackgroundDrawable());
+
     }
 
     public List<Follower> listFollowers(int idCurrentUser) {

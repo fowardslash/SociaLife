@@ -25,6 +25,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/wrapPayment"
         android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -44,7 +45,8 @@
                 android:layout_height="wrap_content"
                 android:text="Mua tick xanh"
                 android:textAllCaps="false"
-                android:backgroundTint="@color/card_1">
+                android:backgroundTint="@color/card_1"
+                android:drawableRight="@drawable/baseline_verified_24">
             </Button>
 
             <TextView
@@ -68,15 +70,15 @@
             android:gravity="center_vertical">
 
             <Button
-                android:layout_weight="1"
                 android:id="@+id/btnGoldFrameAndCrown"
-                android:layout_gravity="left"
-                android:layout_width="wrap_content"
+                android:layout_width="171dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_weight="1"
+                android:backgroundTint="@color/card_3"
+                android:drawableRight="@drawable/vip_crown_3_line"
                 android:text="Mua khung gold và vương miệng"
-                android:textAllCaps="false"
-                android:backgroundTint="@color/card_3">
-            </Button>
+                android:textAllCaps="false"></Button>
 
             <TextView
                 android:layout_weight="1"
@@ -105,7 +107,8 @@
                 android:layout_height="wrap_content"
                 android:text="Tất cả các gói"
                 android:textAllCaps="false"
-                android:backgroundTint="@color/border_fb">
+                android:backgroundTint="@color/border_fb"
+                android:drawableRight="@drawable/baseline_money_24">
             </Button>
 
             <TextView

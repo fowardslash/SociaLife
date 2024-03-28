@@ -11,6 +11,8 @@ import androidx.fragment.app.FragmentManager;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -23,12 +25,15 @@ import com.example.projectmain.Fragment.HomeFragment;
 import com.example.projectmain.Fragment.NotifyFragment;
 import com.example.projectmain.Fragment.SreachFragment;
 import com.example.projectmain.Fragment.UserFragment;
+import com.example.projectmain.Global.OnColorChangeListener;
+import com.example.projectmain.Refactoring.SingletonColorChange.ColorManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements OnColorChangeListener {
     @Override //ngăn việc quy lại trang đăng nhập
     public void onBackPressed() {
+        super.onBackPressed();
     }
 
     BottomNavigationView navigationView;
@@ -54,6 +59,12 @@ public class HomeActivity extends AppCompatActivity {
 
         bars = findViewById(R.id.btnSetting);
 
+        // ColorManager colorManager = ColorManager.getInstance();
+        // toolbar_main.setBackgroundColor(ColorManager.getInstance().getBackgroundColor());
+
+        // ColorManager colorManager = ColorManager.getInstance();
+        // colorManager.setBackgroundColor(Color.WHITE); // Thiết lập màu nền thành màu xanh
+//       toolbar_main.setBackgroundColor(colorManager.getBackgroundColor()); // Sử dụng màu nền từ ColorManager
 
         navigationView = findViewById(R.id.bottom_navigation);
         getSupportFragmentManager().beginTransaction().replace(R.id.body_container, new HomeFragment()).commit();
@@ -105,7 +116,7 @@ public class HomeActivity extends AppCompatActivity {
                         fragment = new UserFragment();
                         break;
                 }
-                if(!isAdd){
+                if (!isAdd) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.body_container, fragment).commit();
                 }
                 return true;
@@ -146,9 +157,17 @@ public class HomeActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.body_container, fragment).commit();
         return true;
     }
+
     @Override
     public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         getMenuInflater().inflate(R.menu.menu_option_post, menu);
+    }
+
+    @Override
+    public void onColorChanged(Drawable color) {
+//        navigationView.setBackgroundDrawable(color);
+//        toolbar_main.setBackgroundDrawable(color);
+        //toolbar_main.setBackgroundDrawable(color);
     }
 }

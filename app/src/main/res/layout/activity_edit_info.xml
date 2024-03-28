@@ -59,6 +59,7 @@
         android:layout_below="@+id/tbActionbar"
         >
         <LinearLayout
+            android:id="@+id/changeTime"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"

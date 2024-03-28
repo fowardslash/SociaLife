@@ -6,7 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".Fragment.UserFragment">
+
+    tools:context=".Fragment.UserFragment"
+    >
 
 
 
@@ -28,10 +30,12 @@
 
         <ImageButton
             android:id="@+id/imageButton2"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="right"
-            android:src="@drawable/box_in_login" />
+            android:src="@drawable/baseline_format_paint_24"
+            android:backgroundTint="@color/background"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"

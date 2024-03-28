@@ -2,11 +2,14 @@ package com.example.projectmain.Refactoring.SingletonColorChange;
 
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 
 public class ColorManager {
     private static ColorManager instance;
     private int backgroundColor;
     private int textColor;
+
+    private Drawable backgroundDrawable;
 
 
 
@@ -15,6 +18,15 @@ public class ColorManager {
         // Khởi tạo màu mặc định
         backgroundColor = Color.WHITE;
         textColor = Color.BLACK; // Màu chữ mặc định
+        backgroundDrawable = null;
+    }
+
+    public Drawable getBackgroundDrawable() {
+        return backgroundDrawable;
+    }
+
+    public void setBackgroundDrawable(Drawable backgroundDrawable) {
+        this.backgroundDrawable = backgroundDrawable;
     }
 
     public static ColorManager getInstance() {
@@ -40,8 +52,6 @@ public class ColorManager {
 
     public void setBackgroundColor(int color) {
         backgroundColor = color;
-
-
     }
 
 

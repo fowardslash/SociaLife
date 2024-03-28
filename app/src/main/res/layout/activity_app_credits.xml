@@ -58,7 +58,8 @@
         android:paddingTop="100dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:id="@+id/wrapAllcre">
 
 
         <ImageView

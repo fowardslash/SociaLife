@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -35,6 +36,7 @@ import android.widget.Toast;
 import com.example.projectmain.Adapter.PostAdapter;
 import com.example.projectmain.Adapter.ViewPagerAdapter;
 import com.example.projectmain.Database.DB;
+import com.example.projectmain.Global.OnColorChangeListener;
 import com.example.projectmain.MainActivity;
 import com.example.projectmain.Model.Post;
 import com.example.projectmain.Model.User;
@@ -51,7 +53,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment  implements OnColorChangeListener {
 
     public HomeFragment() {
     }
@@ -330,4 +332,8 @@ public class HomeFragment extends Fragment {
     }
 
 
+    @Override
+    public void onColorChanged(Drawable color) {
+        tabLayout.setBackgroundDrawable(color);
+    }
 }

@@ -22,16 +22,19 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.projectmain.Database.DB;
+import com.example.projectmain.Global.OnColorChangeListener;
 import com.example.projectmain.Model.User;
 import com.example.projectmain.Prototype.ItemPrototype;
 import com.example.projectmain.Refactoring.Singleton.GlobalUser;
+import com.example.projectmain.Refactoring.SingletonColorChange.ColorManager;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.shape.ShapeAppearanceModel;
 
-public class SettingActivity extends AppCompatActivity {
+public class SettingActivity extends AppCompatActivity implements OnColorChangeListener {
     ImageButton btnExit, btnInfo;
     ImageButton btnLogout;
     ImageView img_Icon;
@@ -60,6 +63,7 @@ public class SettingActivity extends AppCompatActivity {
     ImageView crown;
 
     ImageView tickBlue;
+    ScrollView wrap_parent;
 
     GlobalUser userInstance;
     @SuppressLint({"MissingInflatedId", "LongLogTag", "ResourceAsColor", "WrongViewCast"})
@@ -78,12 +82,17 @@ public class SettingActivity extends AppCompatActivity {
         tvName = findViewById(R.id.setting_userName);
         tvEmail = findViewById(R.id.setting_email);
         ivAvatar = findViewById(R.id.ivAvatar);
+        wrap_parent = findViewById(R.id.wrap_parent);
         //btnListFollow = findViewById(R.id.btnFlolow);
         btnInfo = findViewById(R.id.btn_info);
         btnInfo.setOnClickListener(v -> {
             Intent i = new Intent(SettingActivity.this, AppCreditsActivity.class);
             startActivity(i);
         });
+
+        ColorManager colorManager = ColorManager.getInstance();
+        wrap_parent.setBackgroundDrawable(ColorManager.getInstance().getBackgroundDrawable());
+
 
         tickBlue = findViewById(R.id.blueTick);
 
@@ -267,5 +276,9 @@ public class SettingActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 //        this.overridePendingTransition(R.anim.in_right, R.anim.out_right);
+    }
+
+    @Override
+    public void onColorChanged(Drawable color) {
     }
 }
