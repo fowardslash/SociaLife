@@ -71,22 +71,21 @@ public class    EditInfoActivity extends AppCompatActivity {
     private String[] cameraPermission;
     private String[] storagePermission;
 
-
+    UserProxy proxy;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_info);
         initView();
-
-
+        proxy = new UserProxy(new UserManager(getApplicationContext(), user), getApplicationContext());
         cameraPermission = new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
         db = new DB(this);
 
         sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
-        user = GlobalUser.getInstance(this).getUser();
+        user = proxy.getUser();
         edtUserName.setText(user.getName());
         if(db.getImagefor(user.getId()) == null){
             imgCurrent.setImageResource(R.drawable.def);
@@ -108,7 +107,7 @@ public class    EditInfoActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserProxy proxy = new UserProxy(new UserManager(getApplicationContext(), user), getApplicationContext());
+
                 if(proxy.getUser() != null){
                     user.setName(edtUserName.getText().toString());
                     user.setDescription(edtStory.getText().toString());

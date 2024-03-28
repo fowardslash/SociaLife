@@ -16,15 +16,6 @@ import java.util.List;
 public final class GlobalUser {
     public static final String SHARED_PREF_NAME = "mypref";
     private static final String KEY_EMAIL = "email";
-
-    private final String KEY_PASSWORD = "password";
-
-    private final String KEY_DESCRIPTION = "description";
-
-    private final String KEY_IMAGE_LINK = "linkImage";
-    private final String KEY_NAME = "name";
-
-
     private final User user;
     private final Account account;
     private static GlobalUser INSTANCE;
