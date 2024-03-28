@@ -1,5 +1,9 @@
 package com.example.projectmain.Refactoring.Command;
 
+import android.annotation.SuppressLint;
+import android.util.Log;
+import android.widget.Toast;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projectmain.Model.Post;
@@ -8,26 +12,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UndoCommand extends Command {
-    private List<Post> undo_posts;
-    private int undo_position;
+    private List<Post> undoPosts;
 
     public UndoCommand(Post post, List<Post> postList, RecyclerView.Adapter adapter, int position) {
         super(post, postList, adapter, position);
-        this.undo_posts = new ArrayList<>();
-        this.undo_position = position; 
+        this.undoPosts = new ArrayList<>();
     }
 
-    public void addPostToUndo(Post post) {
+    public void addPostToUndo(Post post_) {
         if (post != null) {
-            undo_posts.add(post);
+            undoPosts.add(post_);
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void execute() {
-        for (int i = 0; i < undo_posts.size(); i++) {
-            postList.add(undo_position + i, undo_posts.get(i));
-        }
-        adapter.notifyDataSetChanged();
+       postList.add(post);
+       adapter.notifyDataSetChanged();
     }
 }
