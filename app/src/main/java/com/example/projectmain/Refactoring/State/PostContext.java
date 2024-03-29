@@ -1,5 +1,6 @@
 package com.example.projectmain.Refactoring.State;
 
+// lớp này tham chiêu các state vào đê thực hiện chuc năng của ConcreteState đó, ngoài ra còn dùng để thay đổi State nếu cần
 public class PostContext implements IPostState{
     private IPostState state;
 

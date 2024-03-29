@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.example.projectmain.Database.DB;
 import com.example.projectmain.Refactoring.Singleton.GlobalUser;
 
+// các class vaajt phẩm điều có hàm addItem để có thể xử lý logic mà nó sử dụng ví dụ như goij ham của db để update vât phẩm
 public class PurpleFrameDecorator extends Decorator{
     public PurpleFrameDecorator(IDecorator decorator) {
         super(decorator);

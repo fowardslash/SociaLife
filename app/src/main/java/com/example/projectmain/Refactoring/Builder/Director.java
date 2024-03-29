@@ -8,20 +8,14 @@ import android.util.Log;
 import java.util.Calendar;
 
 public class Director {
-    private IPostContentValueBuilder _builder;
+    // dùng class Director này để điều khiển việc Build như thế nào ví dụ bài đăng chỉ có text thì build trường chỉ dùng Text
+
+    private final IPostContentValueBuilder _builder; // dùng final để xác nhận rằng một cái chỉ build được cho 1 đối tượng.
 
     public Director(IPostContentValueBuilder builder, int idUser) {
         this._builder = builder;
         this._builder.buildIdUser(idUser);
     }
-    public IPostContentValueBuilder get_builder() {
-        return _builder;
-    }
-
-    public void set_builder(IPostContentValueBuilder _builder) {
-        this._builder = _builder;
-    }
-
     Calendar c = Calendar.getInstance();
     long t = c.getTimeInMillis();
 
@@ -45,7 +39,5 @@ public class Director {
                 .buildTimeOfPost(String.valueOf(t))
                 .build();
     }
-
-
 
 }

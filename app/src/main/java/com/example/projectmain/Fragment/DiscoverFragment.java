@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
 import com.example.projectmain.Adapter.PostAdapter;
@@ -33,6 +34,7 @@ import com.example.projectmain.Refactoring.Mememto.GlobalMemento;
 import com.example.projectmain.Refactoring.Mememto.PostHistory;
 import com.example.projectmain.Refactoring.Mememto.PostMemento;
 import com.example.projectmain.Refactoring.Prototype.ReactionRegistry;
+import com.example.projectmain.Refactoring.SingletonColorChange.ColorManager;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -64,6 +66,7 @@ public class DiscoverFragment extends Fragment {
 
     private static final String KEY_NAME = "name";
     private static final String KEY_IMAGE_LINK = "linkImage";
+    FrameLayout wrapAllDiscover;
     List<String> listName;
     ImageButton btnHeart;
     ImageButton btnMenu;
@@ -87,6 +90,9 @@ public class DiscoverFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         View viewPost = getLayoutInflater().inflate(R.layout.post, null);
 
+        wrapAllDiscover = view.findViewById(R.id.scollViewMain);
+        ColorManager colorManager = ColorManager.getInstance();
+        wrapAllDiscover.setBackgroundDrawable(colorManager.getBackgroundDrawable());
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());
 

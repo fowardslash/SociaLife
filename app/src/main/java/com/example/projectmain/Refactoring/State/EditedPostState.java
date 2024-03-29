@@ -4,9 +4,9 @@ import android.content.Context;
 
 import com.example.projectmain.Database.DB;
 
+// này là concreteState cụ th là dành cho VIỆC EDIT
 public class EditedPostState implements IPostState{
     private PostContext context;
-
     private DB db;
     Context currentContext;
     public EditedPostState(Context currentContext) {

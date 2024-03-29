@@ -44,6 +44,7 @@ import com.example.projectmain.PostDetailActitivty;
 import com.example.projectmain.R;
 import com.example.projectmain.Refactoring.Command.Command;
 import com.example.projectmain.Refactoring.Command.DeleteCommand;
+import com.example.projectmain.Refactoring.Command.Invoker;
 import com.example.projectmain.Refactoring.Command.UndoCommand;
 import com.example.projectmain.Refactoring.Prototype.IReaction;
 import com.example.projectmain.Refactoring.Prototype.IReactionRegistry;
@@ -201,9 +202,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.content.setText(post.getContent());
 
         Time now = new Time(position);
-        String state = post.getStatePost() == 1 ? " (Đã chỉnh sửa)" : "";
+        String state = (post.getStatePost() != null && post.getStatePost() == 1) ? " (Đã chỉnh sửa)" : "";
         holder.time.setText(post.getTime() + state);
-
+//        String state = (post.getStatePost() != null && post.getStatePost() == 1) ? " (Đã chỉnh sửa)" : "";
+//        String timeText = post.getTime() != null ? post.getTime().intValue() + state : "";
+//        holder.time.setText(timeText);
         holder.btnShowProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -515,10 +518,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
                                         Post deletedPost = posts.get(position);
                                         Command deleteCommand = new DeleteCommand(deletedPost, posts, recyclerView.getAdapter(), position);
-                                        deleteCommand.execute();
+                                        Invoker commander = new Invoker(deleteCommand);
+                                        commander.executeCommand();
                                         holder.showSnackbar(recyclerView.getRootView(), "Bạn có muốn Undo bài viết", 10000, deletedPost, posts, position, recyclerView.getAdapter());
                                         //showSnackbar(View view, String message, int duration, Post deletedPost, List<Post> posts, int position, RecyclerView.Adapter adapter) {
-
 
                                     }
                                 });
@@ -789,13 +792,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         }
 
 
+        // snack bar
         public void showSnackbar(View view, String message, int duration, Post deletedPost, List<Post> posts, int position, RecyclerView.Adapter adapter) {
             final Snackbar snackbar = Snackbar.make(view, message, duration);
             snackbar.setAction("Undo", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Command undoCommand = new UndoCommand(deletedPost, posts, adapter, position);
-                    undoCommand.execute();
+                    Invoker commander = new Invoker(undoCommand);
+                    commander.executeCommand();
                     Toast.makeText(view.getContext(), "Undo", Toast.LENGTH_SHORT).show();
                 }
             });

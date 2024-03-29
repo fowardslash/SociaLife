@@ -47,6 +47,8 @@ public class PaymentActivity extends AppCompatActivity {
             }
         });
 
+        // thực hiện các decorator
+
         btnGreenTick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,11 +57,9 @@ public class PaymentActivity extends AppCompatActivity {
                         .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-
                                 IDecorator normalUser = null;
                                 Decorator buyBlueTick = new BlueTickDecorator(normalUser);
                                 buyBlueTick.addItem(PaymentActivity.this);
-
                                 dialogInterface.dismiss();
                             }
                         })

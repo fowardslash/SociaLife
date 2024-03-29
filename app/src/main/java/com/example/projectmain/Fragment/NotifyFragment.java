@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,13 +25,17 @@ import android.widget.CalendarView;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.projectmain.Adapter.NotifAdapter;
 import com.example.projectmain.Database.DB;
+import com.example.projectmain.Global.OnColorChangeListener;
 import com.example.projectmain.Model.NotifClass;
 import com.example.projectmain.Model.User;
 import com.example.projectmain.R;
+import com.example.projectmain.Refactoring.SingletonColorChange.ColorManager;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -50,6 +55,7 @@ public class NotifyFragment extends Fragment implements View.OnClickListener {
     private static final String SHARE_PRE_NAME = "mypref";
     private static final String KEY_EMAIL = "email";
 
+    RelativeLayout wrapAll;
     public NotifyFragment() {
 
     }
@@ -74,7 +80,9 @@ public class NotifyFragment extends Fragment implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
 //
+
 //        Random r = new Random();
 //        NotifClass[] Names = {
 //                new NotifClass("Đen Vâu", ""),
@@ -104,12 +112,15 @@ public class NotifyFragment extends Fragment implements View.OnClickListener {
 
         db = new DB(getContext());
         RecyclerView re = view.findViewById(R.id.rcvNotif);
+        wrapAll = view.findViewById(R.id.wrapAllNotify);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());
         sharedPreferences = getActivity().getSharedPreferences(SHARE_PRE_NAME, Context.MODE_PRIVATE);
         String email = sharedPreferences.getString(KEY_EMAIL, null);
         u = db.getUser(email);
         int idUser = u.getId();
 
+        ColorManager colorManager = ColorManager.getInstance();
+        wrapAll.setBackground(colorManager.getBackgroundDrawable());
 
         listImage = getNotifyList(idUser);
         for (int i = 0; i < listImage.size(); i++) {
@@ -209,6 +220,8 @@ public class NotifyFragment extends Fragment implements View.OnClickListener {
         }
         return notifClasses;
     }
+
+
 }
 
 

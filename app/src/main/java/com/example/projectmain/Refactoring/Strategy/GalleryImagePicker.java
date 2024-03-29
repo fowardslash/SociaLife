@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat;
 
 public class GalleryImagePicker implements IimagePicker {
 
+    // custom thuật toán chọn ảnh từ Gallery
     public static final int CAMERA_REQUEST = 100;
     public static final int STORAGE_REQUEST = 101;
     public static final int IMAGE_PICK_GALLERY = 102;

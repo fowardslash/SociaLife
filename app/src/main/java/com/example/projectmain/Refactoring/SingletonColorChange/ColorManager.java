@@ -12,8 +12,6 @@ public class ColorManager {
     private Drawable backgroundDrawable;
 
 
-
-
     private ColorManager() {
         // Khởi tạo màu mặc định
         backgroundColor = Color.WHITE;

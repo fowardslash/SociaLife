@@ -17,6 +17,7 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 
 import com.example.projectmain.Adapter.PostAdapter;
@@ -26,6 +27,7 @@ import com.example.projectmain.Model.User;
 import com.example.projectmain.R;
 import com.example.projectmain.Refactoring.Singleton.GlobalReactionRegistry;
 import com.example.projectmain.Refactoring.Singleton.GlobalUser;
+import com.example.projectmain.Refactoring.SingletonColorChange.ColorManager;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -87,6 +89,10 @@ public class FollowFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         View viewPost = getLayoutInflater().inflate(R.layout.post, null);
+
+        FrameLayout wrapAllDiscover = view.findViewById(R.id.scollViewMain);
+        ColorManager colorManager = ColorManager.getInstance();
+        wrapAllDiscover.setBackgroundDrawable(colorManager.getBackgroundDrawable());
 
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext().getApplicationContext());
@@ -242,7 +248,7 @@ public class FollowFragment extends Fragment {
         //Cursor cursorGetUser = myDB.rawQuery("SELECT u.* FROM user u JOIN post p on u.id = p.iduser", null);
 
         while (cursor.moveToNext()) {
-            if(cursor.getInt(cursor.getColumnIndex("isshare")) == 1){
+            if (cursor.getInt(cursor.getColumnIndex("isshare")) == 1) {
                 continue;
             }
             int idPost = cursor.getInt(0);

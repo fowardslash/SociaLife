@@ -129,7 +129,7 @@ public class    AddActivity extends AppCompatActivity {
 
                     Log.d("ID USER IN Acitivty: ", String.valueOf(iduser));
                     // BUILDER DESIGN PATTERN
-                    TextAndImageBuilder post = new TextAndImageBuilder();
+                    ContentValueBuilder post = new ContentValueBuilder();
                     Director director = new Director(post, iduser);
                     ContentValues contentValues = director.buildImageAndContentPost(imageUri, content, 0);
 

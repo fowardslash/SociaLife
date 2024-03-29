@@ -2,11 +2,13 @@ package com.example.projectmain.Refactoring.Builder;
 
 import android.content.ContentValues;
 
+// tao class ContentValueBuilder đây là class có chức năng xac định đối tượng cần build là ai
+// và kế implements interface để tạo các hàm build cho từng trường của đối tượng
 public class ContentValueBuilder implements IPostContentValueBuilder{
-    private ContentValues _contentValues = new ContentValues();
+    private ContentValues contentValues = new ContentValues();
 
     public ContentValues GetContentValue(){
-        ContentValues result = this._contentValues;
+        ContentValues result = this.contentValues;
         this.Reset();
         return result;
     }
@@ -16,42 +18,42 @@ public class ContentValueBuilder implements IPostContentValueBuilder{
 
     @Override
     public IPostContentValueBuilder buildContent(String content) {
-        _contentValues.put("content", content);
+        contentValues.put("content", content);
         return this;
     }
 
     @Override
     public IPostContentValueBuilder buildImage(String image) {
-        _contentValues.put("image", image);
+        contentValues.put("image", image);
         return this;
     }
 
     @Override
     public IPostContentValueBuilder buidIsShare(int isShare) {
-        _contentValues.put("isshare", isShare);
+        contentValues.put("isshare", isShare);
         return  this;
     }
 
     @Override
     public IPostContentValueBuilder buildTimeOfPost(String dateTime) {
-        _contentValues.put("datetime", dateTime);
+        contentValues.put("datetime", dateTime);
         return this;
     }
 
     @Override
     public IPostContentValueBuilder buildIdUser(int idUser) {
-        _contentValues.put("iduser", idUser);
+        contentValues.put("iduser", idUser);
         return this;
     }
 
     @Override
     public ContentValues build() {
-        return _contentValues;
+        return contentValues;
     }
 
     @Override
     public void Reset() {
-        this._contentValues = new ContentValues();
+        this.contentValues = new ContentValues();
     }
 
 }

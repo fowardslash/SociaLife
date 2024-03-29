@@ -20,6 +20,7 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +32,7 @@ import com.example.projectmain.Adapter.UserSearchAdapter;
 import com.example.projectmain.Model.Category;
 import com.example.projectmain.Model.Post;
 import com.example.projectmain.Refactoring.Singleton.GlobalReactionRegistry;
+import com.example.projectmain.Refactoring.SingletonColorChange.ColorManager;
 import com.example.projectmain.StrategyDB.CustomSearch;
 import com.example.projectmain.Database.DB;
 import com.example.projectmain.Model.User;
@@ -56,6 +58,8 @@ public class SreachFragment extends Fragment  {
     RecyclerView r, rcvSearchByPost;
     //SearchPostAdapter searchPostAdapter;
     TextView tvSearch;
+
+    LinearLayout wrapAllSearch;
     public CustomSearch searchByName, searchByContent;
     public SreachFragment() {
 
@@ -95,6 +99,9 @@ public class SreachFragment extends Fragment  {
         tvSearch = view.findViewById(R.id.tvResultCount);
         sview = (AutoCompleteTextView) view.findViewById(R.id.searchView);
 
+        wrapAllSearch = view.findViewById(R.id.wrapAllSearch);
+        ColorManager colorManager = ColorManager.getInstance();
+        wrapAllSearch.setBackgroundDrawable(colorManager.getBackgroundDrawable());
 
         List<String> listName = db.getListName();
 

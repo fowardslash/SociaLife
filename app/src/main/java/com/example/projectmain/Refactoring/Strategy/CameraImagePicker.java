@@ -17,14 +17,12 @@ import androidx.core.content.ContextCompat;
 
 public class CameraImagePicker implements IimagePicker {
 
+    // custom thuật toán dọn ảnh từ camera
     public static final int CAMERA_REQUEST = 100;
     public static final int STORAGE_REQUEST = 101;
     public static final int IMAGE_PICK_CAMERA = 103;
-
     private static String[] cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE};
-
     private Context context;
-
     private Uri imageUri;
     private Activity ac;
     public CameraImagePicker(Context context, Activity ac){

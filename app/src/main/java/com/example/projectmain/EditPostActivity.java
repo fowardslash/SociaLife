@@ -29,6 +29,7 @@ import com.example.projectmain.Refactoring.State.PostContext;
 import com.example.projectmain.Refactoring.Strategy.CameraImagePicker;
 import com.example.projectmain.Refactoring.Strategy.GalleryImagePicker;
 import com.example.projectmain.Refactoring.Strategy.IimagePicker;
+import com.example.projectmain.Refactoring.Strategy.PickerContext;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -54,6 +55,7 @@ public class EditPostActivity extends AppCompatActivity {
     public static final int IMAGE_PICK_CAMERA = 103;
 
     SharedPreferences share;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +81,7 @@ public class EditPostActivity extends AppCompatActivity {
         String tempImage = null;
         p = db.getPostFromID(id, name);
 
-        if(p.getImgPost().equals("null")){
+        if (p.getImgPost().equals("null")) {
             ImageWrapper.setVisibility(View.GONE);
             tvNoImg.setVisibility(View.VISIBLE);
         } else {
@@ -101,7 +103,7 @@ public class EditPostActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(edtContent.getText().toString().equals("")){
+                if (edtContent.getText().toString().equals("")) {
                     Toast.makeText(EditPostActivity.this, "Nội dung bị trống!", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -114,7 +116,7 @@ public class EditPostActivity extends AppCompatActivity {
                 PostContext postContext = new PostContext(editedPostState);
                 postContext.editState(p.getId());
 
-                if(l == 0){
+                if (l == 0) {
                     Toast.makeText(EditPostActivity.this, "lỗi!", Toast.LENGTH_SHORT).show();
                 }
                 finish();
@@ -135,15 +137,19 @@ public class EditPostActivity extends AppCompatActivity {
         getNewImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                IimagePicker picker = new CameraImagePicker(EditPostActivity.this,EditPostActivity.this);
-                picker.pickImage(EditPostActivity.this);
+                IimagePicker strategyPickImage = new CameraImagePicker(EditPostActivity.this, EditPostActivity.this);
+                PickerContext picker = new PickerContext(strategyPickImage);
+                picker.setPickerStrategy(EditPostActivity.this);
+                //   picker.pickImage(EditPostActivity.this);
             }
         });
         getImageGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                IimagePicker picker = new GalleryImagePicker(EditPostActivity.this, EditPostActivity.this);
-                picker.pickImage(EditPostActivity.this);
+                IimagePicker strategyPickGallery = new GalleryImagePicker(EditPostActivity.this, EditPostActivity.this);
+                PickerContext picker = new PickerContext(strategyPickGallery);
+                picker.setPickerStrategy(EditPostActivity.this);
+                //picker.pickImage(EditPostActivity.this);
             }
         });
 

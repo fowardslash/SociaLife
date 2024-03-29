@@ -6,17 +6,20 @@
     android:layout_height="match_parent"
     android:padding="15dp"
     tools:context=".Fragment.NotifyFragment"
-    android:background="#FFFFFF">
+    android:id="@+id/wrapAllNotify"
+    >
 
     <LinearLayout
         android:layout_marginTop="80dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcvNotif"
