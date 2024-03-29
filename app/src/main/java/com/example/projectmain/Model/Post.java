@@ -64,7 +64,7 @@ public Post(int id, int iduser, String avatar, String imgPost, String username, 
     String content;
     String time;
 
-    Integer statePost;
+    Integer statePost = 0;
 
     String postContent;
 

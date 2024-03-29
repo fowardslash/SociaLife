@@ -201,7 +201,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.content.setText(post.getContent());
 
         Time now = new Time(position);
-        String state = post.getStatePost() == 1 ? " (Đã chỉnh sửa)" : "";
+        String state = "";
+        if(post.getStatePost() != null)
+            state = post.getStatePost() == 1 ? " (Đã chỉnh sửa)" : "";
         holder.time.setText(post.getTime() + state);
 
         holder.btnShowProfile.setOnClickListener(new View.OnClickListener() {

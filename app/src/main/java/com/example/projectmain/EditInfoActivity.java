@@ -78,7 +78,7 @@ public class    EditInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_info);
         initView();
-        proxy = new UserProxy(new UserManager(getApplicationContext(), user), getApplicationContext());
+        proxy = new UserProxy(new UserManager(getApplicationContext(), GlobalUser.getInstance(this).getUser()), getApplicationContext());
         cameraPermission = new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 

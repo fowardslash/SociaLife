@@ -110,7 +110,8 @@ public class UserFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        proxy = new UserProxy(new UserManager(getActivity(), user), getActivity());
+        proxy = new UserProxy(new UserManager(getActivity(), GlobalUser.getInstance(getActivity()).getUser()), getActivity());
+        user = proxy.getUser();
         tlPostType = view.findViewById(R.id.tlPostType);
         avatarMain = view.findViewById(R.id.avatar_main);
         mtvUsername = view.findViewById(R.id.tvName);
@@ -119,7 +120,6 @@ public class UserFragment extends Fragment {
         mtvPostCount = view.findViewById(R.id.tvPostCount);
         mtvDes = view.findViewById(R.id.tvDes);
         db = new DB(getActivity());
-        user = GlobalUser.getInstance(getActivity()).getUser();
         name = user.getName();
         String email = user.getName(); //email của bố m đâu????
         posts = new ArrayList<Post>();

@@ -20,7 +20,7 @@ public class UserManager implements IUserManager {
 
     public UserManager(Context context, User target) {
         this.c = context;
-        this.user = GlobalUser.getInstance(context).getUser();
+        this.user = target;
     }
 
     @SuppressLint("Range")
